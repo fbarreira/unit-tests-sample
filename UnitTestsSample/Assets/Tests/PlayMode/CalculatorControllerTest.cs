@@ -14,6 +14,7 @@ namespace Tests
         private TMP_InputField inputA;
         private TMP_InputField inputB;
 
+        // For this test everything will be instantiated at runtime.
         [OneTimeSetUp]
         public void Setup()
         {
@@ -33,9 +34,12 @@ namespace Tests
             var fieldInputB = fieldObjectB.AddComponent<ValueInputField>();
             inputB = fieldObjectB.GetComponent<TMP_InputField>();
 
+            // To access private fields, a construct method is used.
             _controller.Construct(fieldInputA, fieldInputB, resultDisplay);
         }
 
+        // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
+        // `yield return null;` to skip a frame.
         [UnityTest]
         public IEnumerator ButtonSumShouldSetSum()
         {
